@@ -1,6 +1,6 @@
 from tree_sitter import Parser
 from tree_sitter import Language
-from mkdocstr.ttypes import FunctionGetter, Function, Parameter
+from mkdocstr.ttypes import FunctionGetter, Function, Parameter, DocstringGenerator
 from mkdocstr.tree_utils import find_node_in_tree
 
 _PY_LANGUAGE = Language("build/languages.so", "python")
@@ -62,3 +62,12 @@ class PythonGetter(FunctionGetter):
       )
     else:
       return None
+
+
+class PythonGoogleGenerator(DocstringGenerator):
+  def generate(cls, fn):
+    strs = [f"{fn.name}" + "\nArgs:\n"] + [
+      f"  {p.name} {' -> ' + p.type if p.type is not None else ''}"
+      for p in fn.parameters
+    ]
+    return "".join(strs)

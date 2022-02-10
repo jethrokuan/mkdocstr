@@ -1,6 +1,7 @@
 from mkdocstr.ttypes import Function
 from mkdocstr.langs import FUNCTION_GETTERS
 from pathlib import Path
+from mkdocstr.langs.python import PythonGoogleGenerator
 
 
 def get_file_extension(file_path: str) -> str:
@@ -14,5 +15,5 @@ def get_docstring_generator(
 ):
   lang = get_file_extension(file_path)
   function_getter = FUNCTION_GETTERS[lang](file_path)
-  style_generator = None
-  return function_getter, None
+  style_generator = PythonGoogleGenerator()
+  return function_getter, style_generator

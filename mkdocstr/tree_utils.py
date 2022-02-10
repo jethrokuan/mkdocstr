@@ -1,3 +1,6 @@
+from mkdocstr.ttypes import Location
+
+
 def move_cursor(cursor, direction):
   if direction != "up":
     if cursor.goto_first_child():

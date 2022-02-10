@@ -25,3 +25,15 @@ class FunctionGetter(ABC):
   @abstractmethod
   def get_function_by_loc(self, loc) -> Function:
     pass
+
+
+class DocstringGenerator:
+  @classmethod
+  def generate(cls, function: Function) -> str:
+    raise NotImplementedError()
+
+
+@dataclass
+class Location:
+  x: int
+  y: int
