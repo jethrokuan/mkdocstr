@@ -2,10 +2,10 @@ from mkdocstr.docstring_generator import get_docstring_generator
 from mkdocstr.ttypes import Parameter, Function
 
 
-def test_get_function_by_name():
+def test_python_get_function_by_name():
   TEST_FILE_PATH = "test_files/python.py"
   function_getter, styler = get_docstring_generator(
-    lang="python", style="google", file_path=TEST_FILE_PATH
+    file_path=TEST_FILE_PATH, style="google"
   )
   function = function_getter.get_function_by_name("a")
   assert function == Function(
