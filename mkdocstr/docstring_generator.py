@@ -1,7 +1,28 @@
 from mkdocstr.ttypes import Function
 from mkdocstr.langs import FUNCTION_GETTERS
 from pathlib import Path
-from mkdocstr.langs.python import PythonGoogleGenerator
+import attr
+
+from mako.template import Template
+
+
+@attr.s
+class DocstringGenerator(object):
+  lang = attr.ib(type=str, default=None)
+  template_file = attr.ib(type=str, default=None)
+  generated_style = attr.ib(type=str, default="yas")
+
+  def set_lang(self, lang: str):
+    self.lang = lang
+    return self
+
+  def set_style(self, style: str):
+    self.template_file = str(Path("templates") / Path(f"{self.lang}_{style}"))
+    return self
+
+  def generate(self, fn: Function) -> str:
+    templ = Template(filename=self.template_file)
+    return templ.render(fn=fn)
 
 
 def get_file_extension(file_path: str) -> str:
@@ -9,11 +30,12 @@ def get_file_extension(file_path: str) -> str:
   return Path(file_path).suffix[1:]
 
 
-def get_docstring_generator(
-  file_path: str,
-  style: str,
-):
+def get_function_getter(file_path: str):
   lang = get_file_extension(file_path)
   function_getter = FUNCTION_GETTERS[lang](file_path)
-  style_generator = PythonGoogleGenerator()
-  return function_getter, style_generator
+  return function_getter
+
+
+def get_docstring_generator(file_path: str, style: str):
+  lang = get_file_extension(file_path)
+  return DocstringGenerator().set_lang(lang).set_style(style)

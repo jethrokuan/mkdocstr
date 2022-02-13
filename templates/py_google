@@ -1,0 +1,14 @@
+"""one-liner
+
+long-description
+
+Example:
+
+Attributes:
+% for param in fn.parameters:
+  ${param.name} ${f"({param.type})" if param.type else ""}: desc
+% endfor
+
+Returns:
+
+"""

@@ -1,6 +1,8 @@
 from dataclasses import dataclass
 from abc import ABC, abstractmethod
+from pathlib import Path
 
+import attr
 from typing import List
 
 
@@ -25,12 +27,6 @@ class FunctionGetter(ABC):
   @abstractmethod
   def get_function_by_loc(self, loc) -> Function:
     pass
-
-
-class DocstringGenerator:
-  @classmethod
-  def generate(cls, function: Function) -> str:
-    raise NotImplementedError()
 
 
 @dataclass

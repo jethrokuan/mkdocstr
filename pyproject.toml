@@ -7,6 +7,8 @@ authors = ["Jethro Kuan <jethrokuan95@gmail.com>"]
 [tool.poetry.dependencies]
 python = "^3.8"
 tree-sitter = "^0.20.0"
+attrs = "^21.4.0"
+Mako = "^1.1.6"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
