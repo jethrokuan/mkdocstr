@@ -3,7 +3,7 @@ from tree_sitter import Language
 from mkdocstr.ttypes import FunctionGetter, Function, Parameter
 from mkdocstr.tree_utils import find_node_in_tree
 
-_PY_LANGUAGE = Language("build/languages.so", "python")
+_PY_LANGUAGE = Language("mkdocstr/languages.so", "python")
 
 _PYTHON_PARSER = Parser()
 _PYTHON_PARSER.set_language(_PY_LANGUAGE)
