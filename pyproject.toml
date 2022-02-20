@@ -1,8 +1,9 @@
 [tool.poetry]
 name = "mkdocstr"
-version = "0.1.0"
+version = "0.1.1"
 description = ""
 authors = ["Jethro Kuan <jethrokuan95@gmail.com>"]
+include = ["mkdocstr/languages.so"]
 
 [tool.poetry.dependencies]
 python = "^3.8"

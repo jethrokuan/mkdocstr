@@ -4,15 +4,15 @@ from tree_sitter import Language
 from pathlib import Path
 
 
-LANGUAGES = list(Path("langs").iterdir())
+def _is_tree_sitter_lang(path: Path):
+  return str(path.name).startswith("tree-sitter-")
 
-BUILD_OUTPUT = "build/languages.so"
 
-Path("build").mkdir(exist_ok=True)
+LANGUAGES = list(filter(_is_tree_sitter_lang, Path("langs").iterdir()))
+
+BUILD_OUTPUT = "mkdocstr/languages.so"
 
 Language.build_library(
-  # Store the library in the `build` directory
-  "build/languages.so",
-  # Include one or more languages
+  BUILD_OUTPUT,
   LANGUAGES,
 )
